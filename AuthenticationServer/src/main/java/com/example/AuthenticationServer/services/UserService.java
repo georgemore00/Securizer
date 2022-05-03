@@ -82,6 +82,7 @@ public class UserService {
         Optional<Otp> o = otpRepository.findOtpByUsername(otpToValidate.getUsername());
         if(o.isPresent()){
             Otp systemOtp = o.get();
+            otpRepository.delete(systemOtp);
             return systemOtp.getCode().equals(otpToValidate.getCode());
         }
         else{
